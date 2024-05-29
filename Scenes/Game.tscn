@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://b45p8knu6ii2j"]
+
+[ext_resource type="PackedScene" uid="uid://c5gfh6ifd56v0" path="res://Scenes/player.tscn" id="1_u4anb"]
+[ext_resource type="Texture2D" uid="uid://bxxw4r5qaib1q" path="res://Assets/Sprites/Stages/Stage1/Platform1.png" id="2_1som7"]
+[ext_resource type="Texture2D" uid="uid://doy0hxoo0vo7y" path="res://Assets/Sprites/Stages/Stage1/SkyStage1.png" id="3_8j5mt"]
+[ext_resource type="Texture2D" uid="uid://cig1alhy2xnp5" path="res://Assets/Sprites/Stages/Stage1/Clouds.png" id="4_8wr1w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldveh"]
+texture = ExtResource("2_1som7")
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_53u0k"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_ldveh")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wakk"]
+texture = ExtResource("4_8wr1w")
+0:0/size_in_atlas = Vector2i(6, 2)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kjyko"]
+sources/0 = SubResource("TileSetAtlasSource_3wakk")
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_u4anb")]
+position = Vector2(62, 142)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_53u0k")
+format = 2
+layer_0/tile_data = PackedInt32Array(720904, 131073, 0, 720905, 196609, 0, 720906, 131073, 0, 720907, 196609, 0, 720908, 131073, 0, 720909, 196609, 0, 720910, 131073, 0, 720911, 196609, 0, 786440, 131073, 0, 851976, 131073, 1, 786441, 196609, 0, 851977, 196609, 1, 786442, 131073, 0, 851978, 131073, 1, 786443, 196609, 0, 851979, 196609, 1, 786444, 131073, 0, 851980, 131073, 1, 786445, 196609, 0, 851981, 196609, 1, 786446, 131073, 0, 851982, 131073, 1, 786447, 196609, 0, 851983, 196609, 1, 720896, 1, 0, 786432, 1, 1, 851968, 131073, 0, 720897, 65537, 0, 786433, 65537, 1, 851969, 196609, 0, 720898, 1, 0, 786434, 1, 1, 851970, 131073, 0, 720899, 65537, 0, 786435, 65537, 1, 851971, 196609, 0, 720900, 1, 0, 786436, 1, 1, 851972, 131073, 0, 720901, 65537, 0, 786437, 65537, 1, 851973, 196609, 0, 720902, 1, 0, 786438, 1, 1, 851974, 131073, 0, 720903, 65537, 0, 786439, 65537, 1, 851975, 196609, 0, 589832, 1, 0, 655368, 1, 1, 589833, 65537, 0, 655369, 65537, 1, 589834, 1, 0, 655370, 1, 1, 589835, 65537, 0, 655371, 65537, 1, 589836, 1, 0, 655372, 1, 1, 589837, 65537, 0, 655373, 65537, 1, 589838, 1, 0, 655374, 1, 1, 589839, 65537, 0, 655375, 65537, 1, 589831, 262145, 0, 589840, 327681, 0)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="SkyStage1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(160, 112)
+texture = ExtResource("3_8j5mt")
+
+[node name="TileMap" type="TileMap" parent="ParallaxBackground/ParallaxLayer"]
+tile_set = SubResource("TileSet_kjyko")
+format = 2
+layer_0/tile_data = PackedInt32Array(65539, 0, 0, 65551, 0, 0, 65545, 0, 0, 196614, 0, 0, 262143, 0, 0, 196621, 0, 0, 196628, 0, 0)
