@@ -1,28 +1,39 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@export var Speed : int = 100
+@export var JumpForce : int = 250
+@export var gravity : int = 700
+@export_range(0.0, 1.0) var friction = 0.225
+@export_range(0.0, 1.0) var acceleration = 0.225
 
 func _physics_process(delta):
-	# Add the gravity.
+	
+	# Gravitasi---------------------------------------------------------
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+		
+	# Inisialisasi tombol kanan/kiri------------------------------------
+	var direction = Input.get_axis('ui_left','ui_right')
+	
+	if direction != 0:
+		velocity.x = lerpf(velocity.x, direction * Speed, acceleration)
+	elif velocity.x != direction and velocity.x != 0 and not is_on_floor():
+		direction = velocity.x
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		velocity.x = lerpf(velocity.x, 0.0, friction)
+		$AnimatedSprite2D.play("Idle Normal")
+	
+	if Input.is_action_just_pressed("attack") and is_on_floor():
+		$AnimatedSprite2D.play("Attack")
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y -= JumpForce	
+	
+	# Memutar karakter
+	if direction == 1 and is_on_floor():
+		$AnimatedSprite2D.flip_h = false
+	elif direction == -1 and is_on_floor():
+		$AnimatedSprite2D.flip_h = true
+		
 	move_and_slide()
