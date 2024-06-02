@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c5gfh6ifd56v0"]
 
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_chltk"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_chltk"]
 [ext_resource type="Texture2D" uid="uid://mpwekejn40md" path="res://Assets/Sprites/William/Idles.png" id="1_p1umv"]
 [ext_resource type="Texture2D" uid="uid://d0hf0ojioknuv" path="res://Assets/Sprites/William/Attack.png" id="2_00gd7"]
 
