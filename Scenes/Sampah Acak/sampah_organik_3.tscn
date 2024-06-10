@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2n1vlagmu0ko"]
+
+[ext_resource type="Script" path="res://Scripts/HoldandDrag.gd" id="1_1qa57"]
+[ext_resource type="Texture2D" uid="uid://n3aqf7sartmq" path="res://Assets/Sprites/Sampah Organik/sampah organik_5.png" id="2_6a30j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7dnd"]
+size = Vector2(20, 21.5)
+
+[node name="sampah_organik3" type="Area2D"]
+script = ExtResource("1_1qa57")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(159, 29)
+scale = Vector2(0.114958, 0.127907)
+texture = ExtResource("2_6a30j")
+region_rect = Rect2(25, 47, 176, 181)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(159, 29)
+shape = SubResource("RectangleShape2D_h7dnd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,14 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://b45p8knu6ii2j"]
+[gd_scene load_steps=15 format=3 uid="uid://b45p8knu6ii2j"]
 
 [ext_resource type="PackedScene" uid="uid://c5gfh6ifd56v0" path="res://Scenes/player.tscn" id="1_u4anb"]
 [ext_resource type="Texture2D" uid="uid://bxxw4r5qaib1q" path="res://Assets/Sprites/Stages/Stage1/Platform1.png" id="2_1som7"]
 [ext_resource type="Texture2D" uid="uid://doy0hxoo0vo7y" path="res://Assets/Sprites/Stages/Stage1/SkyStage1.png" id="3_8j5mt"]
 [ext_resource type="Texture2D" uid="uid://cig1alhy2xnp5" path="res://Assets/Sprites/Stages/Stage1/Clouds.png" id="4_8wr1w"]
 [ext_resource type="PackedScene" uid="uid://dj2mh6x5pcpcx" path="res://Scenes/collectables.tscn" id="5_kniyr"]
-[ext_resource type="Script" path="res://Scripts/Game Manager.gd" id="6_sagft"]
 [ext_resource type="Texture2D" uid="uid://b5jnvtcr253tu" path="res://Assets/Sprites/sampah kartun.jpeg" id="7_4rn52"]
 [ext_resource type="PackedScene" uid="uid://dcojpoqtq17ts" path="res://Scenes/tempat_sampah.tscn" id="8_nhfcx"]
-[ext_resource type="Script" path="res://Scripts/tempat_sampah.gd" id="9_pwj37"]
 [ext_resource type="PackedScene" uid="uid://bp64i5clduy5i" path="res://Scenes/Minigame.tscn" id="10_wlkvj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldveh"]
@@ -66,6 +64,34 @@ texture = ExtResource("4_8wr1w")
 [sub_resource type="TileSet" id="TileSet_kjyko"]
 sources/0 = SubResource("TileSetAtlasSource_3wakk")
 
+[sub_resource type="GDScript" id="GDScript_r8jct"]
+script/source = "extends Node
+@onready var points_label =  %Score
+@onready var organic_score = %OrganicScore
+
+func addPoints ():
+	Global.points += 1
+	points_label.text = \"x\"+ str(Global.points)
+	 
+func setPoints ():
+	points_label.text = \"x\"+ str(Global.points)
+	
+func reducePoints():
+	Global.points -= 1
+	points_label.text = \"x\"+ str(Global.points)
+
+func addOrganicPoints():
+	Global.Organicpoints += 1
+	organic_score.text = \"x\"+ str(Global.Organicpoints)
+	 
+func setOrganicPoints():
+	organic_score.text = \"x\"+ str(Global.Organicpoints)
+	
+func reduceOrganicPoints():
+	Global.Organicpoints -= 1
+	organic_score.text = \"x\"+ str(Global.Organicpoint)
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10cs2"]
 
 [node name="Game" type="Node2D"]
@@ -98,7 +124,7 @@ layer_0/tile_data = PackedInt32Array(131072, 393216, 0, 262146, 0, 0, 131079, 39
 
 [node name="Game Manager" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("6_sagft")
+script = SubResource("GDScript_r8jct")
 
 [node name="Collectables" type="Node" parent="."]
 
@@ -142,7 +168,7 @@ scale = Vector2(0.138889, 0.114444)
 texture = ExtResource("7_4rn52")
 
 [node name="Tempat sampah" parent="." instance=ExtResource("8_nhfcx")]
-script = ExtResource("9_pwj37")
+position = Vector2(-1, 0)
 target_level = ExtResource("10_wlkvj")
 
 [connection signal="body_entered" from="Tempat sampah" to="Tempat sampah" method="_on_body_entered"]

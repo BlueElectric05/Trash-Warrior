@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm5tcrr0vd1l8"]
+
+[ext_resource type="Texture2D" uid="uid://d4a2c0x267as2" path="res://Assets/Sprites/Sampah Anorganik/Sampah anorganik 5.jpg" id="1_0pt3s"]
+[ext_resource type="Script" path="res://Scripts/HoldandDrag2.gd" id="1_ay8gp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5rsj"]
+size = Vector2(16, 18)
+
+[node name="sampah_anorganik5" type="Area2D"]
+script = ExtResource("1_ay8gp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(159, 29)
+scale = Vector2(0.062304, 0.0560169)
+texture = ExtResource("1_0pt3s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(159, 29)
+shape = SubResource("RectangleShape2D_j5rsj")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

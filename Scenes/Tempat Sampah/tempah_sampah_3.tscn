@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpnnjsq3twpu7"]
+
+[ext_resource type="Texture2D" uid="uid://4uolxey40uv4" path="res://Assets/Sprites/tempat sampah (edited).jpeg" id="1_dvtud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uiax6"]
+size = Vector2(43, 54)
+
+[node name="Tempah Sampah 3" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(187, 162)
+scale = Vector2(1.0098, 1)
+texture = ExtResource("1_dvtud")
+region_enabled = true
+region_rect = Rect2(105, 0, 51, 74)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(187, 167)
+shape = SubResource("RectangleShape2D_uiax6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
