@@ -1,0 +1,214 @@
+[gd_scene load_steps=23 format=3 uid="uid://bp64i5clduy5i"]
+
+[ext_resource type="PackedScene" uid="uid://c5gfh6ifd56v0" path="res://Scenes/player.tscn" id="1_kwpjp"]
+[ext_resource type="Texture2D" uid="uid://mpwekejn40md" path="res://Assets/Sprites/William/Idles.png" id="1_vs85h"]
+[ext_resource type="Texture2D" uid="uid://doy0hxoo0vo7y" path="res://Assets/Sprites/Stages/Stage1/SkyStage1.png" id="3_cjt73"]
+[ext_resource type="Texture2D" uid="uid://cig1alhy2xnp5" path="res://Assets/Sprites/Stages/Stage1/Clouds.png" id="4_3t80y"]
+[ext_resource type="Script" path="res://Scripts/Game Manager.gd" id="5_os1qi"]
+[ext_resource type="Script" path="res://Scripts/setScore.gd" id="6_cvvae"]
+[ext_resource type="PackedScene" uid="uid://bbj11f0w55w2m" path="res://Scenes/jenis_sampah1.tscn" id="7_pojxk"]
+[ext_resource type="Script" path="res://Scripts/ButtonSummonSampah.gd" id="7_redyt"]
+[ext_resource type="Texture2D" uid="uid://ccrqcxrnvpivv" path="res://Assets/Sprites/Collectables/trashcount.png" id="7_v0v24"]
+[ext_resource type="Texture2D" uid="uid://dbt8o400ae1t5" path="res://Assets/Sprites/Sampah Organik/sampah organik.png" id="8_dtci0"]
+[ext_resource type="PackedScene" uid="uid://ci7guhu1lrfsh" path="res://Scenes/Tempat Sampah/tempah_sampah_1.tscn" id="9_rqlnq"]
+[ext_resource type="Texture2D" uid="uid://d4a2c0x267as2" path="res://Assets/Sprites/Sampah Anorganik/Sampah anorganik 5.jpg" id="10_gmp53"]
+[ext_resource type="PackedScene" uid="uid://nqksqh4wjfhc" path="res://Scenes/Tempat Sampah/tempah_sampah_2.tscn" id="10_ti31y"]
+[ext_resource type="PackedScene" uid="uid://cpnnjsq3twpu7" path="res://Scenes/Tempat Sampah/tempah_sampah_3.tscn" id="11_d8w4s"]
+[ext_resource type="PackedScene" uid="uid://dwjhovx0gy1r2" path="res://Scenes/Tempat Sampah/tempah_sampah_4.tscn" id="12_gse5t"]
+[ext_resource type="Texture2D" uid="uid://c2atq2cv7uw83" path="res://Assets/Sprites/Sampah Organik/sampah organik_4.png" id="14_bwsss"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjimw"]
+atlas = ExtResource("1_vs85h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evi1v"]
+atlas = ExtResource("1_vs85h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_grn6j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjimw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evi1v")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wakk"]
+texture = ExtResource("4_3t80y")
+0:0/size_in_atlas = Vector2i(6, 2)
+0:0/0 = 0
+6:0/size_in_atlas = Vector2i(6, 2)
+6:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kjyko"]
+sources/0 = SubResource("TileSetAtlasSource_3wakk")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10cs2"]
+
+[node name="Minigame" type="Node2D"]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(38, 65)
+sprite_frames = SubResource("SpriteFrames_grn6j")
+frame = 1
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(161, 112)
+position_smoothing_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_kwpjp")]
+visible = false
+position = Vector2(13, 91)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="SkyStage1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(161, 112)
+texture = ExtResource("3_cjt73")
+
+[node name="TileMap" type="TileMap" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1, -32)
+tile_set = SubResource("TileSet_kjyko")
+format = 2
+layer_0/tile_data = PackedInt32Array(131072, 393216, 0, 262146, 0, 0, 131079, 393216, 0, 262153, 0, 0, 131086, 393216, 0, 262160, 0, 0, 131093, 393216, 0)
+
+[node name="Game Manager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_os1qi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Scorebg" type="Panel" parent="CanvasLayer"]
+offset_left = 19.0
+offset_top = 12.0
+offset_right = 19.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_10cs2")
+script = ExtResource("6_cvvae")
+
+[node name="Score" type="Label" parent="CanvasLayer/Scorebg"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 8.0
+offset_right = 43.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "x 0"
+vertical_alignment = 1
+
+[node name="Trashcount" type="Sprite2D" parent="CanvasLayer/Scorebg"]
+position = Vector2(18, 15)
+texture = ExtResource("7_v0v24")
+
+[node name="Button" type="Button" parent="CanvasLayer/Scorebg"]
+self_modulate = Color(1, 1, 1, 0.258824)
+layout_mode = 0
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 38.0
+offset_bottom = 35.0
+icon = ExtResource("7_v0v24")
+flat = true
+script = ExtResource("7_redyt")
+
+[node name="OrganicScorebg" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 253.0
+offset_top = 60.0
+offset_right = 307.0
+offset_bottom = 91.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_10cs2")
+
+[node name="OrganicScore" type="Label" parent="CanvasLayer/OrganicScorebg"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "x 0"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/OrganicScorebg"]
+position = Vector2(16, 15)
+scale = Vector2(0.138889, 0.114444)
+texture = ExtResource("14_bwsss")
+
+[node name="NonorganicScorebg" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 253.0
+offset_top = 86.0
+offset_right = 307.0
+offset_bottom = 117.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_10cs2")
+
+[node name="NonorganicScore" type="Label" parent="CanvasLayer/NonorganicScorebg"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "x 0"
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/NonorganicScorebg"]
+position = Vector2(16, 16)
+scale = Vector2(0.0766285, 0.0764528)
+texture = ExtResource("10_gmp53")
+
+[node name="Sampah Acak" parent="." instance=ExtResource("7_pojxk")]
+visible = false
+position = Vector2(-6, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(166, 73)
+scale = Vector2(0.134868, 0.124396)
+texture = ExtResource("8_dtci0")
+region_enabled = true
+region_rect = Rect2(694, 95, 152, 207)
+
+[node name="Tempah Sampah" type="Node" parent="."]
+
+[node name="Tempah Sampah 1" parent="Tempah Sampah" instance=ExtResource("9_rqlnq")]
+visible = false
+
+[node name="Tempah Sampah 2" parent="Tempah Sampah" instance=ExtResource("10_ti31y")]
+
+[node name="Tempah Sampah 3" parent="Tempah Sampah" instance=ExtResource("11_d8w4s")]
+
+[node name="Tempah Sampah 4" parent="Tempah Sampah" instance=ExtResource("12_gse5t")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/Scorebg/Button" to="CanvasLayer/Scorebg/Button" method="_on_pressed"]

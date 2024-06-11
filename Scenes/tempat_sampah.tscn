@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcojpoqtq17ts"]
+
+[ext_resource type="Script" path="res://Scripts/tempat_sampah.gd" id="1_al2f2"]
+[ext_resource type="Texture2D" uid="uid://4uolxey40uv4" path="res://Assets/Sprites/tempat sampah (edited).jpeg" id="1_x26pd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwbds"]
+size = Vector2(44, 16.5)
+
+[node name="Tempat sampah" type="Area2D"]
+script = ExtResource("1_al2f2")
+
+[node name="tempat sampah" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(237, 136)
+scale = Vector2(0.213277, 0.216216)
+texture = ExtResource("1_x26pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(237, 136)
+shape = SubResource("RectangleShape2D_kwbds")
