@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cig1alhy2xnp5" path="res://Assets/Sprites/Stages/Stage1/Clouds.png" id="4_3t80y"]
 [ext_resource type="Script" path="res://Scripts/Game Manager.gd" id="5_os1qi"]
 [ext_resource type="Script" path="res://Scripts/setScore.gd" id="6_cvvae"]
-[ext_resource type="Texture2D" uid="uid://b5jnvtcr253tu" path="res://Assets/Sprites/sampah kartun.jpeg" id="7_deo7a"]
 [ext_resource type="PackedScene" uid="uid://bbj11f0w55w2m" path="res://Scenes/jenis_sampah1.tscn" id="7_pojxk"]
 [ext_resource type="Script" path="res://Scripts/ButtonSummonSampah.gd" id="7_redyt"]
+[ext_resource type="Texture2D" uid="uid://ccrqcxrnvpivv" path="res://Assets/Sprites/Collectables/trashcount.png" id="7_v0v24"]
 [ext_resource type="Texture2D" uid="uid://dbt8o400ae1t5" path="res://Assets/Sprites/Sampah Organik/sampah organik.png" id="8_dtci0"]
 [ext_resource type="PackedScene" uid="uid://ci7guhu1lrfsh" path="res://Scenes/Tempat Sampah/tempah_sampah_1.tscn" id="9_rqlnq"]
 [ext_resource type="Texture2D" uid="uid://d4a2c0x267as2" path="res://Assets/Sprites/Sampah Anorganik/Sampah anorganik 5.jpg" id="10_gmp53"]
@@ -97,8 +97,8 @@ script = ExtResource("5_os1qi")
 [node name="Scorebg" type="Panel" parent="CanvasLayer"]
 offset_left = 19.0
 offset_top = 12.0
-offset_right = 73.0
-offset_bottom = 41.0
+offset_right = 19.0
+offset_bottom = 12.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_10cs2")
 script = ExtResource("6_cvvae")
 
@@ -108,25 +108,29 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 36.0
+offset_left = 29.0
+offset_top = 8.0
+offset_right = 43.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 10
 text = "x 0"
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Scorebg"]
-position = Vector2(18, 14)
-scale = Vector2(0.138889, 0.114444)
-texture = ExtResource("7_deo7a")
+[node name="Trashcount" type="Sprite2D" parent="CanvasLayer/Scorebg"]
+position = Vector2(18, 15)
+texture = ExtResource("7_v0v24")
 
 [node name="Button" type="Button" parent="CanvasLayer/Scorebg"]
 self_modulate = Color(1, 1, 1, 0.258824)
 layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 33.0
-offset_bottom = 28.0
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 38.0
+offset_bottom = 35.0
+icon = ExtResource("7_v0v24")
+flat = true
 script = ExtResource("7_redyt")
 
 [node name="OrganicScorebg" type="Panel" parent="CanvasLayer"]
