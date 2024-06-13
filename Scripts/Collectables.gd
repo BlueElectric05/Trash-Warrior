@@ -3,5 +3,5 @@ extends Area2D
 
 func _on_body_entered(body):
 	if (body.name == "Player"):
-		game_manager.addPoints()
+		get_node("/root/Game/Game Manager").addPoints()
 		queue_free()

@@ -1,6 +1,5 @@
-[gd_scene load_steps=23 format=3 uid="uid://bp64i5clduy5i"]
+[gd_scene load_steps=25 format=3 uid="uid://bp64i5clduy5i"]
 
-[ext_resource type="PackedScene" uid="uid://c5gfh6ifd56v0" path="res://Scenes/player.tscn" id="1_kwpjp"]
 [ext_resource type="Texture2D" uid="uid://mpwekejn40md" path="res://Assets/Sprites/William/Idles.png" id="1_vs85h"]
 [ext_resource type="Texture2D" uid="uid://doy0hxoo0vo7y" path="res://Assets/Sprites/Stages/Stage1/SkyStage1.png" id="3_cjt73"]
 [ext_resource type="Texture2D" uid="uid://cig1alhy2xnp5" path="res://Assets/Sprites/Stages/Stage1/Clouds.png" id="4_3t80y"]
@@ -12,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://dbt8o400ae1t5" path="res://Assets/Sprites/Sampah Organik/sampah organik.png" id="8_dtci0"]
 [ext_resource type="PackedScene" uid="uid://ci7guhu1lrfsh" path="res://Scenes/Tempat Sampah/tempah_sampah_1.tscn" id="9_rqlnq"]
 [ext_resource type="Texture2D" uid="uid://d4a2c0x267as2" path="res://Assets/Sprites/Sampah Anorganik/Sampah anorganik 5.jpg" id="10_gmp53"]
+[ext_resource type="Script" path="res://Scripts/continue.gd" id="10_rwawv"]
 [ext_resource type="PackedScene" uid="uid://nqksqh4wjfhc" path="res://Scenes/Tempat Sampah/tempah_sampah_2.tscn" id="10_ti31y"]
 [ext_resource type="PackedScene" uid="uid://cpnnjsq3twpu7" path="res://Scenes/Tempat Sampah/tempah_sampah_3.tscn" id="11_d8w4s"]
+[ext_resource type="PackedScene" uid="uid://h4d1jam8hpgu" path="res://Scenes/level.tscn" id="11_iipub"]
 [ext_resource type="PackedScene" uid="uid://dwjhovx0gy1r2" path="res://Scenes/Tempat Sampah/tempah_sampah_4.tscn" id="12_gse5t"]
 [ext_resource type="Texture2D" uid="uid://c2atq2cv7uw83" path="res://Assets/Sprites/Sampah Organik/sampah organik_4.png" id="14_bwsss"]
 
@@ -56,6 +57,9 @@ sources/0 = SubResource("TileSetAtlasSource_3wakk")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10cs2"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28kgp"]
+bg_color = Color(7.70092e-07, 0.703516, 0.548005, 1)
+
 [node name="Minigame" type="Node2D"]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
@@ -68,10 +72,6 @@ speed_scale = 2.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(161, 112)
 position_smoothing_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("1_kwpjp")]
-visible = false
-position = Vector2(13, 91)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -187,6 +187,24 @@ position = Vector2(16, 16)
 scale = Vector2(0.0766285, 0.0764528)
 texture = ExtResource("10_gmp53")
 
+[node name="ContinueButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -56.0
+offset_right = -14.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_28kgp")
+text = "Continue"
+script = ExtResource("10_rwawv")
+target_level = ExtResource("11_iipub")
+
 [node name="Sampah Acak" parent="." instance=ExtResource("7_pojxk")]
 visible = false
 position = Vector2(-6, 0)
@@ -202,13 +220,14 @@ region_rect = Rect2(694, 95, 152, 207)
 [node name="Tempah Sampah" type="Node" parent="."]
 
 [node name="Tempah Sampah 1" parent="Tempah Sampah" instance=ExtResource("9_rqlnq")]
-visible = false
+modulate = Color(0.396078, 0.396078, 0.396078, 1)
 
 [node name="Tempah Sampah 2" parent="Tempah Sampah" instance=ExtResource("10_ti31y")]
 
 [node name="Tempah Sampah 3" parent="Tempah Sampah" instance=ExtResource("11_d8w4s")]
 
 [node name="Tempah Sampah 4" parent="Tempah Sampah" instance=ExtResource("12_gse5t")]
-visible = false
+modulate = Color(0.394353, 0.394353, 0.394353, 1)
 
 [connection signal="pressed" from="CanvasLayer/Scorebg/Button" to="CanvasLayer/Scorebg/Button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/ContinueButton" to="CanvasLayer/ContinueButton" method="_on_pressed"]

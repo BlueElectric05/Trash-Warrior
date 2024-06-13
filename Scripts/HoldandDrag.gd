@@ -1,11 +1,12 @@
 extends Area2D
 @onready var game_manager = %"Game Manager"
 
+
 var selected = false
 var mouse_offset = 0
-'''func _ready():
-	pass # Replace with function body.
-'''
+func _ready():
+	pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if selected : 
@@ -27,9 +28,15 @@ func _on_area_entered(area):
 		get_node("/root/Minigame/Game Manager").addOrganicPoints()
 		Global.press = false
 		queue_free()
+		if Global.points == 0:
+			get_node("/root/Minigame/CanvasLayer/ContinueButton").visible = true
+
 	elif (area.name == "Tempah Sampah 2"): 
 		get_node("/root/Minigame/Game Manager").reduceNonorganicPoints()
 		Global.press = false
 		queue_free()
+		if Global.points == 0:
+			get_node("/root/Minigame/CanvasLayer/ContinueButton").visible = true
+
 
 

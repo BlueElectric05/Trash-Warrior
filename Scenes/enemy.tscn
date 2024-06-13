@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://nqsq6k8htprq"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_8okob"]
+[ext_resource type="Texture2D" uid="uid://b5jnvtcr253tu" path="res://Assets/Sprites/sampah kartun.jpeg" id="1_ah1wv"]
+[ext_resource type="Script" path="res://Scripts/damage.gd" id="3_0jnhr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l7to"]
+size = Vector2(24, 21)
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_8okob")
+
+[node name="MusuhSampah" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(0.0988889, 0.0855555)
+texture = ExtResource("1_ah1wv")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_0jnhr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_3l7to")
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-1, -10)
+target_position = Vector2(-11, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(12, 0)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
